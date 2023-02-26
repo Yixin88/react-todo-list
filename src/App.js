@@ -8,27 +8,35 @@ function App() {
   const {task, setTask} = useContext(Tasks);
   const [numberOfTask, setNumberOfTask] = useState(0);
 
+  //Adding todo task function
   const addTodo = (todo) => {
     const newTodo = {
       todo: todo, complete: false, id: Math.random()
     }
 
+    //cannot add a empty string
     if (todo.length < 1) {
       return
     }
+
+    //adding non-empty string to the task array
     setTask([...task, newTodo])
 
+    //resetting the input field
     setInput("")
 
+    //increasing the number of tasks counter
     setNumberOfTask(numberOfTask + 1)
   }
 
+  //remove todo that matches the id
   const removeToDo = (id) => {
     setTask(
       task.filter((item) => item.id !== id)
     )
   }
 
+  //changing the completed from false to true
   const completeHandler = (id) => {
     setTask(task.map((item) => {
       if (item.id === id) {
