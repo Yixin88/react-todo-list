@@ -40,7 +40,9 @@ function App() {
   const completeHandler = (id) => {
     setTask(task.map((item) => {
       if (item.id === id) {
-        setNumberOfTask(numberOfTask - 1)
+        if (numberOfTask > 0) {
+          setNumberOfTask(numberOfTask - 1)
+        }
         return {...item, complete: !item.complete}
       }
       return item
