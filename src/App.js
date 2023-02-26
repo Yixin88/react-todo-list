@@ -1,12 +1,17 @@
 import './App.css';
 import {Tasks} from './context/TaskContext';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
  
 function App() {
 
   const [input, setInput] = useState("");
   const {task, setTask} = useContext(Tasks);
   const [numberOfTask, setNumberOfTask] = useState(0);
+
+  useEffect(() => {
+    localStorage.setItem("task", JSON.stringify(task))
+    localStorage.setItem("numberOfTask", numberOfTask)
+  }, [task, numberOfTask])
 
   //Adding todo task function
   const addTodo = (todo) => {
@@ -29,11 +34,17 @@ function App() {
     setNumberOfTask(numberOfTask + 1)
   }
 
-  //remove todo that matches the id
-  const removeToDo = (id) => {
+  //remove todo that matches the id and reduces counter if its not completed
+  const removeToDo = (id, itemComplete) => {
     setTask(
       task.filter((item) => item.id !== id)
     )
+
+    if (itemComplete === false) {
+      if (numberOfTask > 0) {
+        setNumberOfTask(numberOfTask - 1)
+      }
+    }
   }
 
   //changing the completed from false to true
@@ -43,7 +54,7 @@ function App() {
         if (numberOfTask > 0) {
           setNumberOfTask(numberOfTask - 1)
         }
-        return {...item, complete: !item.complete}
+        return {...item, complete: true}
       }
       return item
     }))
@@ -60,8 +71,8 @@ function App() {
           return(
             <li key={item.id}>
               {item.todo}
-              <button onClick={() => completeHandler(item.id)}>Complete</button>
-              <button onClick={() => removeToDo(item.id)}>&times;</button>
+              {item.complete === false && <button onClick={() => completeHandler(item.id)}>Complete</button>}
+              <button onClick={() => removeToDo(item.id, item.complete)}>&times;</button>
             </li>
           )
         })}
