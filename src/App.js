@@ -6,6 +6,7 @@ function App() {
 
   const [input, setInput] = useState("");
   const {task, setTask} = useContext(Tasks);
+  const [numberOfTask, setNumberOfTask] = useState(0);
 
   const addTodo = (todo) => {
     const newTodo = {
@@ -18,6 +19,8 @@ function App() {
     setTask([...task, newTodo])
 
     setInput("")
+
+    setNumberOfTask(numberOfTask + 1)
   }
 
   const removeToDo = (id) => {
@@ -29,6 +32,7 @@ function App() {
   const completeHandler = (id) => {
     setTask(task.map((item) => {
       if (item.id === id) {
+        setNumberOfTask(numberOfTask - 1)
         return {...item, complete: !item.complete}
       }
       return item
@@ -52,6 +56,7 @@ function App() {
           )
         })}
         </ul>
+        <p>{numberOfTask}</p>
     </div>
   );
 }
