@@ -6,7 +6,7 @@ import React, { useContext, useState, useEffect } from 'react'
 function App() {
 
   const [input, setInput] = useState("");
-  const [filter, setFilter] = useState("All");
+  const [filter, setFilter] = useState("all");
   const {task, setTask} = useContext(Tasks);
   const {numberOfTask, setNumberOfTask} = useContext(numOfTask);
 
@@ -70,11 +70,11 @@ function App() {
       <div className='flex justify-center mt-[20px]'>
         <input className='border-2 border-sky-500 rounded-l-lg px-4 py-1 max-w-2xl min-w-[300px] w-[70vw]' type="text" value={input} onChange={(e) => setInput(e.target.value)} />
         <button className='rounded-r-lg bg-sky-500 px-4 py-1 hover:bg-green-500' onClick={() => addTodo(input)}>Add</button>
-          <select onChange={(e)=>setFilter(e.target.value)}>
-            <option value="all">All</option>
-            <option value="todo">To-Do</option>
-            <option value="completed">Completed</option>
-          </select>
+        <select className='ml-[10px] rounded max-w-[100px]' onChange={(e)=>setFilter(e.target.value)}>
+          <option value="all">All</option>
+          <option value="todo">To-Do</option>
+          <option value="completed">Completed</option>
+        </select>
       </div>
 
 
