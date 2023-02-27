@@ -1,12 +1,26 @@
 import './App.css';
 import {Tasks} from './context/TaskContext';
 import React, { useContext, useState, useEffect } from 'react'
+
+const getLocalStorage = () => {
+  let taskCounter = localStorage.getItem("numberOfTask")
+  if (taskCounter) {
+    return (taskCounter = JSON.parse(localStorage.getItem("numberOfTask")))
+  } else {
+    return [];
+  }
+}
  
 function App() {
 
   const [input, setInput] = useState("");
   const {task, setTask} = useContext(Tasks);
-  const [numberOfTask, setNumberOfTask] = useState(0);
+  const [numberOfTask, setNumberOfTask] = useState(getLocalStorage());
+
+  // useEffect(() => {
+  //   const data = localStorage.getItem("numberOfTask")
+  //   setNumberOfTask(JSON.parse(data))
+  // }, [])
 
   useEffect(() => {
     localStorage.setItem("task", JSON.stringify(task))
