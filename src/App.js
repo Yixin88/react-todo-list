@@ -70,14 +70,14 @@ function App() {
   
 
   return (
-    <div className="divBox flex flex-col items-center justify-center h-screen w-screen font-mono bg-sky-100">
+    <div className="divBox flex flex-col items-center justify-center h-screen w-screen font-mono bg-sky-100 h-[100vh]">
 
       <h1 className="text-6xl font-bold mt-[10px] font-[monospace]">To-Do App</h1>
 
       <div className='flex justify-center mt-[20px]'>
         <input onKeyPress={handleEnter} id='searchInput' className='border-2 border-sky-500 rounded-l-lg px-4 py-1 max-w-2xl min-w-[300px] w-[70vw]' type="text" value={input} onChange={(e) => setInput(e.target.value)} />
         <button id='searchBtn' className='rounded-r-lg bg-sky-500 px-4 py-1 hover:bg-green-500' onClick={() => addTodo(input)}>Add</button>
-        <select className='ml-[10px] rounded max-w-[100px]' onChange={(e)=>setFilter(e.target.value)}>
+        <select className='ml-[10px] rounded max-w-[150px]' onChange={(e)=>setFilter(e.target.value)}>
           <option value="all">All</option>
           <option value="todo">To-Do</option>
           <option value="completed">Completed</option>
@@ -89,7 +89,7 @@ function App() {
         {(filter === "todo" || filter === "all") && 
           <div className='flex flex-col items-center'>
             <p className='mt-[20px] text-2xl'>Tasks Remaining: {numberOfTask}</p>
-            <ul className='flex flex-col gap-y-2 p-4 h-96 bg-teal-400 max-w-6xl min-w-[320px] w-[85vw] items-center rounded-[10px]'>
+            <ul className='flex flex-col gap-y-2 p-4 min-h-[300px] bg-teal-400 max-w-6xl min-w-[320px] w-[85vw] items-center rounded-[10px]'>
               {task.filter((arrayItem)=> arrayItem.complete !== true).map((item) => {
               return(
                 <li key={item.id} className='test flex items-center justify-between max-w-5xl min-w-[300px] gap-x-5 p-5 bg-teal-50 rounded w-[80vw]'>
@@ -110,7 +110,7 @@ function App() {
         {(filter === "completed" || filter === "all") &&  
           <div className='flex flex-col items-center'>
             <h2 className='mt-[20px] text-2xl'>Completed Tasks</h2>
-            <ul className='flex flex-col gap-y-2 p-4 h-96 bg-green-400 max-w-6xl min-w-[320px] w-[85vw] items-center rounded-[10px] mb-[20px]'>
+            <ul className='flex flex-col gap-y-2 p-4 min-h-[300px] bg-green-400 max-w-6xl min-w-[320px] w-[85vw] items-center rounded-[10px] mb-[20px]'>
               {task.filter((arrayItem)=> arrayItem.complete === true).map((item) => {
                 return(
                   <li key={item.id} className='test flex items-center justify-between max-w-5xl min-w-[300px] gap-x-5 p-5 bg-teal-50 rounded w-[80vw]'>
