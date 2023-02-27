@@ -62,14 +62,21 @@ function App() {
     }))
   }
 
+  //pressing enter trigger onclick 
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      addTodo(input)
+    }}
+  
+
   return (
     <div className="divBox flex flex-col items-center justify-center h-screen w-screen font-mono bg-sky-100">
 
       <h1 className="text-6xl font-bold mt-[10px] font-[monospace]">To-Do App</h1>
 
       <div className='flex justify-center mt-[20px]'>
-        <input className='border-2 border-sky-500 rounded-l-lg px-4 py-1 max-w-2xl min-w-[300px] w-[70vw]' type="text" value={input} onChange={(e) => setInput(e.target.value)} />
-        <button className='rounded-r-lg bg-sky-500 px-4 py-1 hover:bg-green-500' onClick={() => addTodo(input)}>Add</button>
+        <input onKeyPress={handleEnter} id='searchInput' className='border-2 border-sky-500 rounded-l-lg px-4 py-1 max-w-2xl min-w-[300px] w-[70vw]' type="text" value={input} onChange={(e) => setInput(e.target.value)} />
+        <button id='searchBtn' className='rounded-r-lg bg-sky-500 px-4 py-1 hover:bg-green-500' onClick={() => addTodo(input)}>Add</button>
         <select className='ml-[10px] rounded max-w-[100px]' onChange={(e)=>setFilter(e.target.value)}>
           <option value="all">All</option>
           <option value="todo">To-Do</option>
