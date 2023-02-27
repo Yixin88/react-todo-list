@@ -1,26 +1,13 @@
 import './App.css';
 import {Tasks} from './context/TaskContext';
+import {numOfTask} from './context/Counter';
 import React, { useContext, useState, useEffect } from 'react'
-
-const getLocalStorage = () => {
-  let taskCounter = localStorage.getItem("numberOfTask")
-  if (taskCounter) {
-    return (taskCounter = JSON.parse(localStorage.getItem("numberOfTask")))
-  } else {
-    return [];
-  }
-}
  
 function App() {
 
   const [input, setInput] = useState("");
   const {task, setTask} = useContext(Tasks);
-  const [numberOfTask, setNumberOfTask] = useState(getLocalStorage());
-
-  // useEffect(() => {
-  //   const data = localStorage.getItem("numberOfTask")
-  //   setNumberOfTask(JSON.parse(data))
-  // }, [])
+  const {numberOfTask, setNumberOfTask} = useContext(numOfTask);
 
   useEffect(() => {
     localStorage.setItem("task", JSON.stringify(task))
@@ -80,8 +67,22 @@ function App() {
       <h1>To-Do App</h1>
       <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
       <button onClick={() => addTodo(input)}>Add</button>
-        <ul>
-          {task.filter((arrayItem)=> arrayItem.complete !== true).map((item) => {
+      <ul>
+        {task.filter((arrayItem)=> arrayItem.complete !== true).map((item) => {
+        return(
+          <li key={item.id}>
+            {item.todo}
+            {item.complete === false && <button onClick={() => completeHandler(item.id)}>Complete</button>}
+            <button onClick={() => removeToDo(item.id, item.complete)}>&times;</button>
+          </li>
+        )
+      })}
+      </ul>
+
+      <h2>Completed Tasks</h2>
+
+      <ul>
+        {task.filter((arrayItem)=> arrayItem.complete === true).map((item) => {
           return(
             <li key={item.id}>
               {item.todo}
@@ -90,19 +91,8 @@ function App() {
             </li>
           )
         })}
-        </ul>
-        <ul>
-          {task.filter((arrayItem)=> arrayItem.complete === true).map((item) => {
-            return(
-              <li key={item.id}>
-                {item.todo}
-                {item.complete === false && <button onClick={() => completeHandler(item.id)}>Complete</button>}
-                <button onClick={() => removeToDo(item.id, item.complete)}>&times;</button>
-              </li>
-            )
-          })}
-        </ul>
-        <p>{numberOfTask}</p>
+      </ul>
+      <p>{numberOfTask}</p>
     </div>
   );
 }
