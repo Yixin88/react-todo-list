@@ -81,7 +81,7 @@ function App() {
       <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
       <button onClick={() => addTodo(input)}>Add</button>
         <ul>
-          {task.map((item) => {
+          {task.filter((arrayItem)=> arrayItem.complete !== true).map((item) => {
           return(
             <li key={item.id}>
               {item.todo}
@@ -90,6 +90,17 @@ function App() {
             </li>
           )
         })}
+        </ul>
+        <ul>
+          {task.filter((arrayItem)=> arrayItem.complete === true).map((item) => {
+            return(
+              <li key={item.id}>
+                {item.todo}
+                {item.complete === false && <button onClick={() => completeHandler(item.id)}>Complete</button>}
+                <button onClick={() => removeToDo(item.id, item.complete)}>&times;</button>
+              </li>
+            )
+          })}
         </ul>
         <p>{numberOfTask}</p>
     </div>
