@@ -8,7 +8,7 @@ const getLocalStorage = () => {
     if (taskCounter) {
       return (taskCounter = +localStorage.getItem("numberOfTask"))
     } else {
-      return [];
+      return localStorage.setItem("numberOfTask", 0);
     }
   }
 
