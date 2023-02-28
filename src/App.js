@@ -70,7 +70,7 @@ function App() {
   
 
   return (
-    <div className="divBox flex flex-col items-center justify-center h-screen w-screen font-mono bg-sky-100 h-[100%]">
+    <div className="divBox flex flex-col items-center justify-center w-screen font-mono bg-sky-100 h-[100%]">
 
       <h1 className="text-6xl font-bold mt-[50px] font-[monospace]">To-Do App</h1>
 
