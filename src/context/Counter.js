@@ -6,9 +6,11 @@ export const numOfTask = createContext();
 const getLocalStorage = () => {
     let taskCounter = localStorage.getItem("numberOfTask")
     if (taskCounter) {
-      return (taskCounter = +localStorage.getItem("numberOfTask"))
+        console.log('if ran')
+      return (taskCounter = parseInt(localStorage.getItem("numberOfTask")))
     } else {
-      return localStorage.setItem("numberOfTask", 0);
+        console.log('else ran')
+      return localStorage.setItem("numberOfTask", JSON.stringify(0));
     }
   }
 
